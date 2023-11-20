@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <div id="inline" style="width:600px;height:500px;padding:20px;"></div>
+  <pre id="res" style="border: 1px solid red; padding: 5p; background-color: #ccc;"></pre>
+  <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+   const apikey = 'ACeVU3uZLTZKEZPTRg6IDz'; //devportal api_key
+   // const sec = {
+   //   policy: 'eyJleHBpcnkiOjE2ODAwMjY0MDAsImNhbGwiOlsicGljayIsIndyaXRlIiwic3RvcmUiXX0=',
+   //   signature: '35e02a9b8595cdb779eb15ed97622044a5d3a6b68f210ab577389a3e0b3c7dc1'
+   // };
+
+   const client = filestack.init(apikey, {});
+   client.on("upload.error", console.log)
+   const options = {
+     // accept: 'image/*',
+     // allowManualRetry: true,
+     cleanupImageExif: true,
+     // concurrency: 2,
+     container: document.querySelector('#inline'),
+     // customAuthText: {
+     //   // use it for every cloud authentication screen
+     //   default: {
+     //     top: [
+     //       'CUSTOM TEXT TOP',
+     //       ' BLAA'
+     //     ],
+     //     bottom: [
+     //       'CUSTOM TEXT BOTTOM',
+     //       'second line'
+     //     ]
+     //   },
+     //   // override a default bottom text for only gmail
+     //   instagram: {
+     //     bottom: [
+     //       'INSTA YO FIRST LINE',
+     //       'INSTA YO SECOND LINE'
+     //     ]
+     //   }},
+     // customSourceContainer: 'S3',
+     // customSourceName: 'MARYS S3',
+     // customSourcePath: 'pathHere',  
+     // customText:'',
+     // disableStorageKey: true,
+     // disableThumbnails: true,
+     // disableTransformer: true,
+     displayMode: 'inline',
+     // uploadInBackground: false,
+     // errorsTimeout: 300,
+     // exposeOriginalFile: true,
+     fromSources: ['local_file_system', 'unsplash', 'url', 'imagesearch', 'facebook', 'instagram', 'googledrive', 'dropbox', 'box', 'github', 'gmail', 'picasa', 'onedrive', 'onedriveforbusiness', 'clouddrive', 'customsource', 'tint', 'webcam', 'audio','video'],
+     // globalDropZone: true,
+     // hideModalWhenUploading: true,
+     // imageDim: [800,800],
+     // imageMax: [1200,1200],
+     // imageMin: [10,10],
+     // lang: 'pl',
+     maxFiles: 5,
+     // maxSize: 10 * 1024 * 1024,
+     // minFiles: 1,
+     // modalSize: [900, 900],
+     // onCancel: ,
+     // onClose:
+     // onFileCropped: function,
+     // onFileSelected: function,
+     // onFileUploadFailed: function,
+     // onFileUploadFinished: function,
+     // onFileUploadProgress: function,
+     // onFileUploadStarted: function,
+     // onOpen: function,
+     // onUploadStarted: function,
+     // rootId: 'lalala',
+     // startUploadingWhenMaxFilesReached: true,
+    //  storeTo: {
+    //    location: "dropbox"
+    //  },
+     // transformations:{
+     //   circle: false,
+     //   crop: {}, 
+     //   rotate: false
+     // },
+     uploadConfig: {
+       tags: {
+         "firsttag": "yo",
+         "second": "elo"
+       }
+     },
+     // useSentryBreadcrumbs: false,
+     // videoResolution: "320x240",
+     // viewType: "grid",
+     // uploadInBackground: false,
+
+     onUploadDone: (res) => {
+       const pre = document.createElement('pre');
+       pre.style = "border: 1px solid red; padding: 5p; background-color: #ccc;margin-bottom:5px";
+       pre.prepend(JSON.stringify(res, null, 2));
+       document.body.appendChild(pre)
+     },
+   };
+   const initialState = {};
+   const picker = client.picker(options);
+   picker.open();
+
+
+ });
+
+  </script>
+</body>
+</html>
