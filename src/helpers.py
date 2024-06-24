@@ -12,15 +12,12 @@ from flask import request, abort
 from dotenv import load_dotenv
 
 load_dotenv()
-# SHOPIFY_SECRET = os.environ.get('SHOPIFY_SECRET')
-# SHOPIFY_API_KEY = os.environ.get('SHOPIFY_API_KEY')
-# INSTALL_REDIRECT_URL = os.environ.get('INSTALL_REDIRECT_URL')
-# APP_NAME = os.environ.get('APP_NAME')
 
-SHOPIFY_SECRET = "3067b39210799bc8b7e69c9d012d7d99"
-SHOPIFY_API_KEY = "dded2a333facb276e49a44762f1dc10b"
-INSTALL_REDIRECT_URL = "https://0084-103-211-52-227.ngrok-free.app/app_installed"
-APP_NAME = "filestack-app-example"
+SHOPIFY_SECRET = os.environ.get('SHOPIFY_SECRET')
+SHOPIFY_API_KEY = os.environ.get('SHOPIFY_API_KEY')
+INSTALL_REDIRECT_URL = os.environ.get('INSTALL_REDIRECT_URL')
+APP_NAME = os.environ.get('APP_NAME')
+
 
 def generate_install_redirect_url(shop: str, scopes: List, nonce: str, access_mode: List):
     scopes_string = ','.join(scopes)
@@ -33,6 +30,10 @@ def generate_post_install_redirect_url(shop: str):
     redirect_url = f"https://{shop}/admin/apps/{APP_NAME}"
     return redirect_url
 
+def generate_app_host_url(shop:str, route: str):
+    shop_name = shop.replace(".myshopify.com", "")
+    base_url = f"https://admin.shopify.com/store/{shop_name}/apps/"
+    return base_url + APP_NAME + '/' + route
 
 def verify_web_call(f):
     @wraps(f)

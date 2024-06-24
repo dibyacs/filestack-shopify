@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+  <div>
+    <div style="padding: 5px 10%;">
+      <div id="filepicker" style="width: 600px;max-width: -webkit-fill-available;min-width: -webkit-fill-available;max-height: -webkit-fill-available;min-height: -webkit-fill-available;height: 600px;padding:20px;"></div>
+      <form name="frmProductId" id="frmProductId">
+        <input type="hidden" name="image_url" id="image_url" />
+        <input type="hidden" name="alt" id="alt" />
+      </form>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', onDOMContentLoaded);
+
+    function onDOMContentLoaded() {
+      const apikey = '{{filestack_obj.apikey}}'; //devportal api_key
+      let initOptions = {};
+
+      if ('{{ ENVIRONMENT }}' == 'STAGE') {
+        initOptions.cname = 'stage.filestackapi.com';
+      }
+
+      const client = filestack.init(apikey, initOptions);
+      const pickerOpt = {};
+
+      pickerOpt.container = '#filepicker';
+      pickerOpt.displayMode = 'inline';
+      pickerOpt.onUploadDone = (res) => {
+        for(let i=0; i<res.filesUploaded.length; i++){
+          if(res && res.filesUploaded[i].url){
+            $('#image_url').val(res.filesUploaded[i].url);
+            $('#alt').val(res.filesUploaded[i].alt || '');
+            $.ajax({
+              type: "POST",
+              url: '/upload-image-file',
+              dataType: 'json',
+              data: $('#frmProductId').serialize(), // serializes the form's elements.
+              success: function(res) {
+                alert("Image uploaded");
+              }
+            });
+          }
+        }
+      }
+
+      const fromSources = {{ filestack_obj.from_sources|ensure_array|safe }};
+      if (Array.isArray(fromSources) && fromSources.length > 0) {
+        pickerOpt.fromSources = fromSources;
+      }
+
+      const allowed = {{ filestack_obj.accept_file_types|ensure_array|safe }};
+      if (Array.isArray(allowed) && allowed.length > 0) {
+        pickerOpt.accept = allowed;
+      }
+
+      const maxSize = {{ filestack_obj.max_filesize|ensure_number|safe}};
+      if (maxSize !== '') {
+        pickerOpt.maxSize = maxSize;
+      }
+
+      const maxFiles = {{ filestack_obj.max_files|ensure_number|safe}};
+      if (maxFiles !== '') {
+        pickerOpt.maxFiles = maxFiles;
+      }
+
+      const imageMax = {{ filestack_obj.image_dimension|ensure_array|safe}};
+      if (Array.isArray(imageMax) && imageMax.length == 2) {
+        pickerOpt.imageMax = imageMax;
+      }
+
+      const imageDim = {{ filestack_obj.max_image_dimension|ensure_array|safe}};
+      if (Array.isArray(imageDim) && imageDim.length == 2) {
+        pickerOpt.imageDim = imageDim;
+      }
+
+      //TODO: Image editor image_editor
+
+      const transformation_crop = {% if filestack_obj.transformation_crop %}true{% else %}false{% endif %};
+      const transformation_resize = {% if filestack_obj.transformation_resize %}true{% else %}false{% endif %};
+      const transformation_rotate = {% if filestack_obj.transformation_rotate %}true{% else %}false{% endif %};
+      if (transformation_crop || transformation_resize || transformation_rotate) {
+        pickerOpt.transformations = {};
+        pickerOpt.transformations.crop = transformation_crop
+        pickerOpt.transformations.resize = transformation_resize
+        pickerOpt.transformations.rotate = transformation_rotate
+      }
+
+      const uploadRetry = {{ filestack_obj.num_retry|ensure_number|safe}};
+      if (Number.isInteger(uploadRetry) && uploadRetry >= 0 && uploadRetry <= 20) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.retry = uploadRetry;
+      }
+
+      const uploadConcurrency = {{ filestack_obj.num_concurrency|ensure_number|safe}};
+      // For following validation refer - https://github.com/filestack/filestack-js/blob/c9a366248ce701748a5411e34ee3c0f8d54d4e43/src/schema/upload.schema.ts#L26
+      if (Number.isInteger(uploadConcurrency) && uploadConcurrency > 0 && uploadConcurrency <= 20) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.concurrency = uploadConcurrency;
+      }
+
+      const uploadTimeout = {{ filestack_obj.error_timeout|ensure_number|safe}};
+      if (Number.isInteger(uploadTimeout) && uploadTimeout > 0) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.timeout = uploadTimeout;
+      }
+
+      const uploadIntegrity = {% if filestack_obj.intigintergrity_check %}true{% else %}false{% endif %};
+      if (uploadIntegrity) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.disableIntegrityCheck = uploadIntegrity;
+      }
+
+      const uploadIntelligent = {% if filestack_obj.intelligent %}true{% else %}false{% endif %};
+      if (uploadIntelligent) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.intelligent = uploadIntelligent;
+      }
+
+      const uploadIntelligentChunkSize = {{ filestack_obj.chunk_size|ensure_number|safe}};
+      if (Number.isInteger(uploadIntelligentChunkSize) && uploadIntelligentChunkSize > 0) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.intelligentChunkSize = uploadIntelligentChunkSize;
+      }
+
+      // partsize
+      const uploadPartSize = {{ filestack_obj.part_size|ensure_number|safe}};
+      if (Number.isInteger(uploadPartSize) && uploadPartSize > 5 * 1024 * 1024) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.partSize = uploadPartSize;
+      }
+
+      // progress interval
+      const uploadProgressInterval = {{ filestack_obj.progress_interval|ensure_number|safe}};
+      if (Number.isInteger(uploadProgressInterval) && uploadProgressInterval > 0) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.progressInterval = uploadProgressInterval;
+      }
+
+      // retry factor
+      const uploadRetryFactor = {{ filestack_obj.retry_factor|ensure_number|safe}};
+      if (Number.isInteger(uploadRetryFactor) && uploadRetryFactor > 0) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.retryFactor = uploadRetryFactor;
+      }
+
+      // retry max time
+      const uploadRetryMaxTime = {{ filestack_obj.retry_maxtime|ensure_number|safe}};
+      if (Number.isInteger(uploadRetryMaxTime) && uploadRetryFactor >= 0) {
+        if (!pickerOpt.uploadConfig) {
+          pickerOpt.uploadConfig = {}
+        }
+        pickerOpt.uploadConfig.retryMaxTime = uploadRetryMaxTime;
+      }
+
+      const allowManualRetry = {% if filestack_obj.allow_manual_retry %}true{% else %}false{% endif %};
+      if (allowManualRetry) {
+        pickerOpt.allowManualRetry = allowManualRetry;
+      }
+
+      const disableTransformer = {% if filestack_obj.disable_transformer %}true{% else %}false{% endif %};
+      if (disableTransformer) {
+        pickerOpt.disableTransformer = disableTransformer;
+      }
+
+      // language
+      const lang = "{{ filestack_obj.language|ensure_string|safe }}";
+      if (typeof lang === 'string' && lang.length == 2) {
+        pickerOpt.lang = lang;
+      }
+
+      const minFiles = {{ filestack_obj.min_files|ensure_number|safe}};
+      // Refer - https://github.com/filestack/filestack-js/blob/c9a366248ce701748a5411e34ee3c0f8d54d4e43/src/schema/picker.schema.ts
+      if (Number.isInteger(minFiles) && minFiles > 0 && minFiles <= 1000000) {
+        pickerOpt.minFiles = minFiles;
+      }
+
+      // supportEmail
+      const supportEmail = "{{ filestack_obj.support_email|ensure_string|safe }}";
+      if (typeof supportEmail === 'string' && supportEmail.length > 0) {
+        pickerOpt.supportEmail = supportEmail;
+      }
+
+      const initialState = {};
+      const picker = client.picker(pickerOpt);
+      picker.open();
+    }
+
+    function onUploadDone(res) {
+      for(let i=0; i<res.filesUploaded.length; i++){
+        if(res && res.filesUploaded[i].url){
+          $('#image_url').val(res.filesUploaded[i].url);
+          $('#alt').val(res.filesUploaded[i].alt || '');
+          $.ajax({
+            type: "POST",
+            url: '/upload-image-file',
+            dataType: 'json',
+            data: $('#frmProductId').serialize(), // serializes the form's elements.
+            success: function(res) {
+              alert("Image uploaded");
+            }
+          });
+        }
+      } 
+    }
+  </script>
+{% endblock %}

@@ -1,0 +1,101 @@
+th {
+    text-align: center;
+  }
+  td {
+    text-align: center;
+  }
+  .table td, .table th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 13px;
+  }
+  .prd-title{
+    font-size: 13px;font-weight: bold;
+    text-align: left;
+  }
+  .prd-title-header
+  {
+    text-align: left;
+    padding-left: 46px !important;
+  }
+  /* ---------Newlines of CSS added---------- */
+  body{
+    background-color: #efefef;
+  }
+  .tab{
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+      background-color: #ffffff;
+  }
+  .tablinks{
+      text-align: start;
+      padding: 14px 18px;
+      border: none;
+      font-size: 16px;
+      background-color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .active {
+      color: #2463bc;
+      position: relative;
+    }
+    .active::before {
+      content: "";
+      position: absolute;
+      height: 3px;
+      background: #2463bc;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+  }
+  .tablecard{
+    background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+      margin: 12px;
+  }
+  .tableheadercon{
+    margin: 12px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+  }
+  .tableheadercon input{
+    border: 1px solid #CCC;
+      border-radius: 6px 0px 0px 6px;
+      padding: 4px;
+      font-size: 14px;
+  }
+  
+  .grey-btn {
+      padding: 6px 7px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid #CCC;
+  }
+  .searchbox{
+    background-color: #d2d2d2;
+      border-radius: 6px;
+  }
+  .searchbox i{
+  margin: 0px 8px;
+  cursor: pointer;
+  }
+  .actionset{ 
+    display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+  }
+  .prd-title-header{
+    padding-left: 15% !important;
+  }
+  .tab button.active {background: none;}
+  .tab button:hover{background: none;}

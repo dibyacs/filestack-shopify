@@ -1,0 +1,533 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+
+  <div id="product-images">
+  
+    <div class="Polaris-LegacyCard" style="margin: 0 20px;">
+      <div class="Polaris-IndexFilters__IndexFiltersWrapper">
+        <div class="Polaris-IndexFilters">
+          <div>
+            <div class="Polaris-IndexFilters-Container" style="display: flex; justify-content: right;">
+              <div class="Polaris-InlineStack" style="--pc-inline-stack-align:start;--pc-inline-stack-block-align:center;--pc-inline-stack-wrap:nowrap;--pc-inline-stack-gap-xs:var(--p-space-0);--pc-inline-stack-gap-md:var(--p-space-200);--pc-inline-stack-flex-direction-xs:row">
+                
+                <div class="Polaris-IndexFilters__ActionWrap">
+                  <span class="">
+                    <div style="transition:opacity 150ms var(--p-motion-ease);opacity:1">
+                      <button class="Polaris-Button Polaris-Button--pressable Polaris-Button--variantSecondary Polaris-Button--sizeSlim Polaris-Button--textAlignCenter Polaris-Button--iconOnly" aria-label="Search and filter results" type="button" tabindex="0" aria-describedby=":Rd6cq6:" data-polaris-tooltip-activator="true">
+                        <span class="Polaris-Button__Icon">
+                          <div class="Polaris-InlineStack" style="--pc-inline-stack-wrap:wrap;--pc-inline-stack-gap-xs:var(--p-space-0);--pc-inline-stack-flex-direction-xs:row">
+                            <span class="Polaris-Icon Polaris-Icon--toneBase">
+                              <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg" focusable="false" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.323 13.383a5.5 5.5 0 1 1 1.06-1.06l2.897 2.897a.75.75 0 1 1-1.06 1.06l-2.897-2.897Zm.677-4.383a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z">
+                                </path>
+                              </svg>
+                            </span>
+                            <span class="Polaris-Icon Polaris-Icon--toneBase">
+                              <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg" focusable="false" aria-hidden="true">
+                                <path d="M3 6a.75.75 0 0 1 .75-.75h12.5a.75.75 0 0 1 0 1.5h-12.5a.75.75 0 0 1-.75-.75Z">
+                                </path>
+                                <path d="M6.75 14a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75Z">
+                                </path>
+                                <path d="M5.5 9.25a.75.75 0 0 0 0 1.5h9a.75.75 0 0 0 0-1.5h-9Z">
+                                </path>
+                              </svg>
+                            </span>
+                          </div>
+                        </span>
+                      </button>
+                    </div>
+                  </span>
+                  
+                    <span class="">
+                      <a href="https://admin.shopify.com/store/{{shop_name}}/products/new" target="_blank" class="Polaris-Button Polaris-Button--pressable Polaris-Button--variantSecondary Polaris-Button--sizeMedium Polaris-Button--textAlignCenter" type="button">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Add product</span>
+                      </a>
+                      
+                    </span>
+                    <span>
+                      <button onclick="upload_image()" class="Polaris-Button Polaris-Button--pressable Polaris-Button--variantSecondary Polaris-Button--sizeMedium Polaris-Button--textAlignCenter Polaris-Button--iconWithText" type="button">
+                        <span class="Polaris-Button__Icon">
+                          <span class="Polaris-Icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.5 6.26a.75.75 0 0 1-1.5 0v-.51a.75.75 0 0 0-.75-.75h-8.5a.75.75 0 0 0-.75.75v.51a.75.75 0 0 1-1.5 0v-.51a2.25 2.25 0 0 1 2.25-2.25h8.5a2.25 2.25 0 0 1 2.25 2.25v.51Z"/><path d="M10.75 16.01a.75.75 0 0 1-1.5 0v-6.69l-1.72 1.72a.75.75 0 1 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06l-1.72-1.72v6.69Z"/></svg>
+                          </span>
+                        </span>
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Filepicker</span>
+                      </button>
+                    </span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
+      </div>
+      <div class="Polaris-IndexTable">
+        <div class="Polaris-IndexTable__IndexTableWrapper">
+          <div class="Polaris-IndexTable__LoadingPanel">
+            <div class="Polaris-IndexTable__LoadingPanelRow">
+              <span class="Polaris-Spinner Polaris-Spinner--sizeSmall">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.229 1.173a9.25 9.25 0 1011.655 11.412 1.25 1.25 0 10-2.4-.698 6.75 6.75 0 11-8.506-8.329 1.25 1.25 0 10-.75-2.385z">
+                  </path>
+                </svg>
+              </span>
+              <span role="status">
+                <span class="Polaris-Text--root Polaris-Text--visuallyHidden">
+                </span>
+              </span>
+              <span class="Polaris-IndexTable__LoadingPanelText">Loading orders…</span>
+            </div>
+          </div>
+          <div class="Polaris-IndexTable__StickyTable" role="presentation">
+            <div>
+              <div>
+              </div>
+              <div>
+                <div class="Polaris-IndexTable__StickyTableHeader">
+                  <div class="Polaris-IndexTable__LoadingPanel">
+                    <div class="Polaris-IndexTable__LoadingPanelRow">
+                      <span class="Polaris-Spinner Polaris-Spinner--sizeSmall">
+                        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7.229 1.173a9.25 9.25 0 1011.655 11.412 1.25 1.25 0 10-2.4-.698 6.75 6.75 0 11-8.506-8.329 1.25 1.25 0 10-.75-2.385z">
+                          </path>
+                        </svg>
+                      </span>
+                      <span role="status">
+                        <span class="Polaris-Text--root Polaris-Text--visuallyHidden">
+                        </span>
+                      </span>
+                      <span class="Polaris-IndexTable__LoadingPanelText">Loading orders…</span>
+                    </div>
+                  </div>
+                  <div class="Polaris-IndexTable__StickyTableHeadings">
+                    <div class="Polaris-IndexTable__TableHeading Polaris-IndexTable__TableHeading--first" data-index-table-sticky-heading="true" style="min-width: 38px;">
+                      <div class="Polaris-IndexTable__ColumnHeaderCheckboxWrapper">
+                        <label class="Polaris-Choice Polaris-Choice--labelHidden Polaris-Checkbox__ChoiceLabel" for=":R2cqakq6:">
+                          <span class="Polaris-Choice__Control">
+                            <span class="Polaris-Checkbox">
+                              <input id=":R2cqakq6:" type="checkbox" class="Polaris-Checkbox__Input" aria-invalid="false" role="checkbox" aria-checked="false" value="">
+                              <span class="Polaris-Checkbox__Backdrop">
+                              </span>
+                              <span class="Polaris-Checkbox__Icon Polaris-Checkbox--animated">
+                                <svg viewBox="0 0 16 16" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+                                  <path class="" d="M1.5,5.5L3.44655,8.22517C3.72862,8.62007,4.30578,8.64717,4.62362,8.28044L10.5,1.5" transform="translate(2 2.980376)" opacity="0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1">
+                                  </path>
+                                </svg>
+                              </span>
+                            </span>
+                          </span>
+                          <span class="Polaris-Choice__Label">
+                            <span class="Polaris-Text--root Polaris-Text--bodyMd">Select all orders</span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="Polaris-IndexTable__TableHeading Polaris-IndexTable__TableHeading--second" data-index-table-sticky-heading="true" style="left: 38px; min-width: 70px;">
+                      <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Order</span>
+                      </div>
+                    </div>
+                    <div class="Polaris-IndexTable__TableHeading" data-index-table-sticky-heading="true" style="min-width: 160px;">
+                      <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Date</span>
+                      </div>
+                    </div>
+                    <div class="Polaris-IndexTable__TableHeading" data-index-table-sticky-heading="true" style="min-width: 161px;">
+                      <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Customer</span>
+                      </div>
+                    </div>
+                    <div class="Polaris-IndexTable__TableHeading Polaris-IndexTable--tableHeadingAlignEnd" data-index-table-sticky-heading="true" style="min-width: 90px;">
+                      <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Total</span>
+                      </div>
+                    </div>
+                    <div class="Polaris-IndexTable__TableHeading" data-index-table-sticky-heading="true" style="min-width: 155px;">
+                      <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Payment status</span>
+                      </div>
+                    </div>
+                    <div class="Polaris-IndexTable__TableHeading Polaris-IndexTable__TableHeading--last" data-index-table-sticky-heading="true" style="min-width: 159px;">
+                      <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                        <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Fulfillment status</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="Polaris-IndexTable__BulkActionsWrapper">
+                  <div>
+                    <div class="Polaris-InlineStack" style="--pc-inline-stack-block-align:center;--pc-inline-stack-wrap:wrap;--pc-inline-stack-gap-xs:var(--p-space-400);--pc-inline-stack-flex-direction-xs:row">
+                      <div class="Polaris-BulkActions__BulkActionsSelectAllWrapper">
+                        <div class="Polaris-CheckableButton">
+                          <div class="Polaris-CheckableButton__Checkbox">
+                            <label class="Polaris-Choice Polaris-Choice--labelHidden Polaris-Checkbox__ChoiceLabel" for=":R1baakq6:">
+                              <span class="Polaris-Choice__Control">
+                                <span class="Polaris-Checkbox">
+                                  <input id=":R1baakq6:" type="checkbox" class="Polaris-Checkbox__Input" aria-invalid="false" role="checkbox" aria-checked="false" value="">
+                                  <span class="Polaris-Checkbox__Backdrop">
+                                  </span>
+                                  <span class="Polaris-Checkbox__Icon Polaris-Checkbox--animated">
+                                    <svg viewBox="0 0 16 16" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+                                      <path class="" d="M1.5,5.5L3.44655,8.22517C3.72862,8.62007,4.30578,8.64717,4.62362,8.28044L10.5,1.5" transform="translate(2 2.980376)" opacity="0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" pathLength="1">
+                                      </path>
+                                    </svg>
+                                  </span>
+                                </span>
+                              </span>
+                              <span class="Polaris-Choice__Label">
+                                <span class="Polaris-Text--root Polaris-Text--bodyMd">Select all 3 orders</span>
+                              </span>
+                            </label>
+                          </div>
+                          <span class="Polaris-CheckableButton__Label">
+                            <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">0 selected</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="Polaris-IndexTable-ScrollContainer">
+            <table class="Polaris-IndexTable__Table Polaris-IndexTable__Table--sticky">
+              <thead>
+                <tr>
+                  <th class="Polaris-IndexTable__TableHeading Polaris-IndexTable__TableHeading--first" data-index-table-heading="true">
+                  </th>
+                  <th class="Polaris-IndexTable__TableHeading Polaris-IndexTable__TableHeading--second" data-index-table-heading="true" style="left: 38px;">
+                    <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                      <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Product</span>
+                    </div>
+                  </th>
+                  <th class="Polaris-IndexTable__TableHeading" data-index-table-heading="true">
+                    <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                      <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Price</span>
+                    </div>
+                  </th>
+                  <th class="Polaris-IndexTable__TableHeading" data-index-table-heading="true">
+                    <div style="--pc-index-table-heading-extra-padding-right:0" class="">
+                      <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">SKU Number</span>
+                    </div>
+                  </th>
+                  <th class="Polaris-IndexTable__TableHeading Polaris-IndexTable__TableHeading--last" data-index-table-heading="true">
+                    <div style="display: flex; justify-content: center;" class="">
+                      <span class="Polaris-Text--root Polaris-Text--bodySm Polaris-Text--medium">Upload/View</span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in product_list %}
+                <tr id="{{p.title}}" class="Polaris-IndexTable__TableRow" style="cursor: default;">
+                  <td class="Polaris-IndexTable__TableCell Polaris-IndexTable__TableCell--first">
+                    <span class="Polaris-Text--root Polaris-Text--bodyMd Polaris-Text--bold">
+                      <span class="Polaris-Text--root Polaris-Text--bodyMd Polaris-Text--semibold">
+                        {% if p.images %}
+                        <img src="{{p.images[0].src}}" width="29" height="40" />
+                        {% endif %}
+                      </span>
+                    </span>
+                  </td>
+                  <td class="Polaris-IndexTable__TableCell">{{p.title}}</td>
+                  <td class="Polaris-IndexTable__TableCell">{{p.variants[0].price}}</td>
+                  <td class="Polaris-IndexTable__TableCell">
+                    <span class="Polaris-Text--root Polaris-Text--block Polaris-Text--start Polaris-Text--base">
+                      {% if p.variants[0].sku == '' %} NO SKU {% endif %}{{p.variants[0].sku}}
+                    </span>
+                  </td>
+                  <td class="Polaris-IndexTable__TableCell">
+                    <span style="display: flex;justify-content: center;gap: 5px;">
+                      <button onclick="upload_image({{p.id}})" class="Polaris-Button Polaris-Button--pressable Polaris-Button--variantSecondary Polaris-Button--sizeMedium Polaris-Button--textAlignCenter Polaris-Button--iconOnly" aria-label="Upload File" type="button">
+                        <span class="Polaris-Button__Icon">
+                          <span class="Polaris-Icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path d="M16.5 6.26a.75.75 0 0 1-1.5 0v-.51a.75.75 0 0 0-.75-.75h-8.5a.75.75 0 0 0-.75.75v.51a.75.75 0 0 1-1.5 0v-.51a2.25 2.25 0 0 1 2.25-2.25h8.5a2.25 2.25 0 0 1 2.25 2.25v.51Z"/><path d="M10.75 16.01a.75.75 0 0 1-1.5 0v-6.69l-1.72 1.72a.75.75 0 1 1-1.06-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06l-1.72-1.72v6.69Z"/></svg>
+                          </span>
+                        </span>
+                      </button>
+                      
+                      <a href="https://admin.shopify.com/store/{{shop_name}}/products/{{p.id}}" target="_blank" class="Polaris-Button Polaris-Button--pressable Polaris-Button--variantSecondary Polaris-Button--sizeMedium Polaris-Button--textAlignCenter Polaris-Button--iconOnly" aria-label="View Product">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M13 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-1.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/><path fill-rule="evenodd" d="M10 4c-2.476 0-4.348 1.23-5.577 2.532a9.266 9.266 0 0 0-1.4 1.922 5.98 5.98 0 0 0-.37.818c-.082.227-.153.488-.153.728s.071.501.152.728c.088.246.213.524.371.818.317.587.784 1.27 1.4 1.922 1.229 1.302 3.1 2.532 5.577 2.532 2.476 0 4.348-1.23 5.577-2.532a9.265 9.265 0 0 0 1.4-1.922 5.98 5.98 0 0 0 .37-.818c.082-.227.153-.488.153-.728s-.071-.501-.152-.728a5.984 5.984 0 0 0-.371-.818 9.269 9.269 0 0 0-1.4-1.922c-1.229-1.302-3.1-2.532-5.577-2.532Zm-5.999 6.002v-.004c.004-.02.017-.09.064-.223a4.5 4.5 0 0 1 .278-.608 7.768 7.768 0 0 1 1.17-1.605c1.042-1.104 2.545-2.062 4.487-2.062 1.942 0 3.445.958 4.486 2.062a7.77 7.77 0 0 1 1.17 1.605c.13.24.221.447.279.608.047.132.06.203.064.223v.004c-.004.02-.017.09-.064.223a4.503 4.503 0 0 1-.278.608 7.768 7.768 0 0 1-1.17 1.605c-1.042 1.104-2.545 2.062-4.487 2.062-1.942 0-3.445-.958-4.486-2.062a7.766 7.766 0 0 1-1.17-1.605 4.5 4.5 0 0 1-.279-.608c-.047-.132-.06-.203-.064-.223Z"/></svg>
+                      </a>
+                    </span>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="Polaris-IndexTable__ScrollBarContainer Polaris-IndexTable--scrollBarContainerHidden">
+            <div class="Polaris-IndexTable__ScrollBar" style="--pc-index-table-scroll-bar-content-width: 816px;">
+              <div class="Polaris-IndexTable__ScrollBarContent">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true" id="filepickers">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>Filestack Upload</div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <! jDOCTYPE html>
+                <html lang="en">
+
+                <head>
+                  <meta charset="UTF-8">
+                  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <div id="inline" style="height:500px;"></div>
+                  <pre id="res" style="border: 1px solid red; padding: 5p; background-color: #ccc;"></pre>
+                  <script src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+                  <title>Document</title>
+                </head>
+
+                <body>
+                  <script>
+                    window.addEventListener('DOMContentLoaded', onDOMContentLoaded); //DOMContentLoaded
+
+                    function onDOMContentLoaded() {
+                      const apikey = '{{filestack_obj.apikey}}'; //devportal api_key
+                      let initOptions = {};
+
+                      if ('{{ ENVIRONMENT }}' == 'STAGE') {
+                        initOptions.cname = 'stage.filestackapi.com';
+                      }
+
+                      const client = filestack.init(apikey, initOptions);
+                      const pickerOpt = {};
+
+                      pickerOpt.container = '#inline';
+                      pickerOpt.displayMode = 'inline';
+                      pickerOpt.onUploadDone = (res) => {
+                        $('#filepickers').hide();
+                        for (let i = 0; i < res.filesUploaded.length; i++) {
+                          if (res && res.filesUploaded[i].url) {
+                            $('#image_url').val(res.filesUploaded[i].url);
+                            upload_image_shopify();
+                          }
+                        }
+                        alert('Image has been uploaded');
+                        window.location.href = '/images';
+                      }
+
+                      const fromSources = {{ filestack_obj.from_sources|ensure_array|safe }};
+                      if (Array.isArray(fromSources) && fromSources.length > 0) {
+                        pickerOpt.fromSources = fromSources;
+                      }
+
+                      const accept = {{ filestack_obj.accept_file_types|ensure_array|safe }};
+                      if (Array.isArray(accept) && accept.length > 0) {
+                        pickerOpt.accept = accept;
+                      }
+
+                      const maxSize = {{ filestack_obj.max_filesize|ensure_number|safe}};
+                      if (maxSize !== '') {
+                        pickerOpt.maxSize = maxSize;
+                      }
+
+                      const maxFiles = {{ filestack_obj.max_files|ensure_number|safe}};
+                      if (maxFiles !== '') {
+                        pickerOpt.maxFiles = maxFiles;
+                      }
+
+                      const imageMax = {{ filestack_obj.image_dimension|ensure_array|safe}};
+                      if (Array.isArray(imageMax) && imageMax.length == 2) {
+                        pickerOpt.imageMax = imageMax;
+                      }
+
+                      const imageDim = {{ filestack_obj.max_image_dimension|ensure_array|safe}};
+                      if (Array.isArray(imageDim) && imageDim.length == 2) {
+                        pickerOpt.imageDim = imageDim;
+                      }
+
+                      //TODO: Image editor image_editor
+
+                      const transformation_crop = {% if filestack_obj.transformation_crop %}true{% else %}false{% endif %};
+                      const transformation_resize = {% if filestack_obj.transformation_resize %}true{% else %}false{% endif %};
+                      const transformation_rotate = {% if filestack_obj.transformation_rotate %}true{% else %}false{% endif %};
+                      if (transformation_crop || transformation_resize || transformation_rotate) {
+                        pickerOpt.transformations = {};
+                        pickerOpt.transformations.crop = transformation_crop
+                        pickerOpt.transformations.resize = transformation_resize
+                        pickerOpt.transformations.rotate = transformation_rotate
+                      }
+
+                      const uploadRetry = {{ filestack_obj.num_retry|ensure_number|safe}};
+                      if (Number.isInteger(uploadRetry) && uploadRetry >= 0 && uploadRetry <= 20) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.retry = uploadRetry;
+                      }
+
+                      const uploadConcurrency = {{ filestack_obj.num_concurrency|ensure_number|safe}};
+                      // For following validation refer - https://github.com/filestack/filestack-js/blob/c9a366248ce701748a5411e34ee3c0f8d54d4e43/src/schema/upload.schema.ts#L26
+                      if (Number.isInteger(uploadConcurrency) && uploadConcurrency > 0 && uploadConcurrency <= 20) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.concurrency = uploadConcurrency;
+                      }
+
+                      const uploadTimeout = {{ filestack_obj.error_timeout|ensure_number|safe}};
+                      if (Number.isInteger(uploadTimeout) && uploadTimeout > 0) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.timeout = uploadTimeout;
+                      }
+
+                      const uploadIntegrity = {% if filestack_obj.intigintergrity_check %}true{% else %}false{% endif %};
+                      if (uploadIntegrity) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.disableIntegrityCheck = uploadIntegrity;
+                      }
+
+                      const uploadIntelligent = {% if filestack_obj.intelligent %}true{% else %}false{% endif %};
+                      if (uploadIntelligent) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.intelligent = uploadIntelligent;
+                      }
+
+                      const uploadIntelligentChunkSize = {{ filestack_obj.chunk_size|ensure_number|safe}};
+                      if (Number.isInteger(uploadIntelligentChunkSize) && uploadIntelligentChunkSize > 0) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.intelligentChunkSize = uploadIntelligentChunkSize;
+                      }
+
+                      // partsize
+                      const uploadPartSize = {{ filestack_obj.part_size|ensure_number|safe}};
+                      if (Number.isInteger(uploadPartSize) && uploadPartSize > 5 * 1024 * 1024) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.partSize = uploadPartSize;
+                      }
+
+                      // progress interval
+                      const uploadProgressInterval = {{ filestack_obj.progress_interval|ensure_number|safe}};
+                      if (Number.isInteger(uploadProgressInterval) && uploadProgressInterval > 0) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.progressInterval = uploadProgressInterval;
+                      }
+
+                      // retry factor
+                      const uploadRetryFactor = {{ filestack_obj.retry_factor|ensure_number|safe}};
+                      if (Number.isInteger(uploadRetryFactor) && uploadRetryFactor > 0) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.retryFactor = uploadRetryFactor;
+                      }
+
+                      // retry max time
+                      const uploadRetryMaxTime = {{ filestack_obj.retry_maxtime|ensure_number|safe}};
+                      if (Number.isInteger(uploadRetryMaxTime) && uploadRetryFactor >= 0) {
+                        if (!pickerOpt.uploadConfig) {
+                          pickerOpt.uploadConfig = {}
+                        }
+                        pickerOpt.uploadConfig.retryMaxTime = uploadRetryMaxTime;
+                      }
+
+                      const allowManualRetry = {% if filestack_obj.allow_manual_retry %}true{% else %}false{% endif %};
+                      if (allowManualRetry) {
+                        pickerOpt.allowManualRetry = allowManualRetry;
+                      }
+
+                      const disableTransformer = {% if filestack_obj.disable_transformer %}true{% else %}false{% endif %};
+                      if (disableTransformer) {
+                        pickerOpt.disableTransformer = disableTransformer;
+                      }
+
+                      // language
+                      const lang = "{{ filestack_obj.language|ensure_string|safe }}";
+                      if (typeof lang === 'string' && lang.length == 2) {
+                        pickerOpt.lang = lang;
+                      }
+
+                      const minFiles = {{ filestack_obj.min_files|ensure_number|safe}};
+                      // Refer - https://github.com/filestack/filestack-js/blob/c9a366248ce701748a5411e34ee3c0f8d54d4e43/src/schema/picker.schema.ts
+                      if (Number.isInteger(minFiles) && minFiles > 0 && minFiles <= 1000000) {
+                        pickerOpt.minFiles = minFiles;
+                      }
+
+                      // supportEmail
+                      const supportEmail = "{{ filestack_obj.support_email|ensure_string|safe }}";
+                      if (typeof supportEmail === 'string' && supportEmail.length > 0) {
+                        pickerOpt.supportEmail = supportEmail;
+                      }
+
+                      const initialState = {};
+                      console.log(pickerOpt)
+                      const picker = client.picker(pickerOpt);
+                      picker.open();
+                    }
+
+                    function upload_image_shopify(){
+
+                      var productId = $('#product_id').val();
+                      var url = productId ? '/upload-product-images' : '/upload-image-file';
+
+                      $.ajax({
+                        type: "POST",
+                        url: url,
+                        dataType: 'json',
+                        data: $('#frmProductId').serialize(), // serializes the form's elements.
+                        success: function (res) {
+                          // alert('Image has been uploaded');
+                        }
+                      });
+                    }
+
+                    function upload_image(product_id) {
+                      $('#product_id').val(product_id);
+                      $('#filepickers').modal('show');
+                      $('.bd-example-modal-lg').addClass('show')
+                    }
+                  </script>
+                </body>
+
+                </html>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<form name="frmProductId" id="frmProductId">
+  <input type="hidden" name="image_url" id="image_url" />
+  <input type="hidden" name="product_id" id="product_id" />
+</form>
+<script>
+
+</script>
+{% endblock %}

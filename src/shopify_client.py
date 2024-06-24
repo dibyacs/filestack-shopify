@@ -5,19 +5,18 @@ import logging
 
 import requests
 from requests.exceptions import HTTPError
+from http.client import HTTPSConnection, HTTPConnection
+from base64 import b64encode
+from models import DBConfig, db, ShopifyFilepicker
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# SHOPIFY_SECRET = os.environ.get('SHOPIFY_SECRET')
-# SHOPIFY_API_KEY = os.environ.get('SHOPIFY_API_KEY')
+SHOPIFY_SECRET = os.environ.get('SHOPIFY_SECRET')
+SHOPIFY_API_KEY = os.environ.get('SHOPIFY_API_KEY')
 
-SHOPIFY_SECRET = "3067b39210799bc8b7e69c9d012d7d99"
-SHOPIFY_API_KEY = "dded2a333facb276e49a44762f1dc10b"
-
-
-SHOPIFY_API_VERSION = "2020-01"
+SHOPIFY_API_VERSION = "2024-01"
 
 REQUEST_METHODS = {
     "GET": requests.get,
@@ -167,6 +166,7 @@ class ShopifyStoreClient():
         if not webhook_response:
             return None
         return webhook_response['webhook']
+    
 
     def get_webhooks_count(self, topic: str):
         call_path = f'webhooks/count.json?topic={topic}'
@@ -175,3 +175,76 @@ class ShopifyStoreClient():
         if not webhook_count_response:
             return None
         return webhook_count_response['count']
+    
+    
+    def _upload_product_image(self,image_url,product_id):
+        call_path = 'products/'+product_id+'/images.json'
+        data = {
+            "image": {
+                "src": image_url
+            }
+        }
+        response = self.authenticated_shopify_call(call_path=call_path, method='POST', payload=data)
+        return response
+    
+    
+    def _upload_image_file(self, alt, image_url):
+        call_path = 'graphql.json'
+        create_file_query = '''
+        mutation fileCreate($files: [FileCreateInput!]!) {
+          fileCreate(files: $files) {
+            files {
+              alt
+            }
+            userErrors {
+              field
+              message
+            }
+          }
+        }
+        '''
+        create_file_variables = {
+            "files": [
+                {
+                    "alt": alt or "alt-tag",
+                    "contentType": "IMAGE",
+                    "originalSource": image_url
+                }
+            ]
+        }
+        payload = {"query": create_file_query, "variables": create_file_variables}
+        response = self.authenticated_shopify_call(call_path=call_path, method='POST', payload=payload)
+        return response
+
+
+    def get_all_products(self):
+        call_path = 'products.json'
+        response = self.authenticated_shopify_call(call_path=call_path, method='GET')
+        return response
+
+    
+    def get_filepicker_config(token):
+        picker_configs = ShopifyFilepicker.query.filter(ShopifyFilepicker.access_token == token).all()
+        picker_configs = [config.to_dict() for config in picker_configs]
+        return picker_configs
+
+    
+    def update_record(app, access_token, data):
+        with app.app_context():
+            record = ShopifyFilepicker.query.filter_by(access_token=access_token).first()
+            if record:
+                for key, value in data.items():
+                    if hasattr(record, key):
+                        setattr(record, key, value)
+                
+                db.session.commit()
+                return record
+            else:
+                return None
+
+
+def set_http_cookies(variable,value):
+    from http import cookies
+    ck = cookies.SimpleCookie()
+    ck[variable] = value
+    print(ck)

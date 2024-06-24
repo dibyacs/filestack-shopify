@@ -1,0 +1,619 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <div id="picker-settings">
+            <div class="main-container">
+                <form name="frmPickerPreference" id="frmPickerPreference">
+                    <input type="hidden" name="shop" id="shop" value="{{filestack_obj.shop_domain}}" />
+                    <input type="hidden" name="developer_id" id="developer_id" value="{{filestack_obj.developer_id}}" />
+                    <input type="hidden" name="email" id="email" value="{{filestack_obj.filestack_email}}" />
+
+
+                    <div class="setting-container">
+                        <div class="setting-tabs">
+                            <div class="tabs">
+                                <button class="tabBtn activeTab">Account Settings</button>
+                                <button class="tabBtn">Uploader Settings</button>
+                                <button class="tabBtn">Storage Settings</button>
+                            </div>
+                        </div>
+                        <div class="settingContent-container">
+                            <div class="tabContent defaultOpen ">
+                                <div class="account-setting">
+                                    <div class="card">
+                                        <div class="label-input">
+                                            <label for="apiKey">Filestack API Key (required)</label>
+                                            <input type="text" id="filestack_apikey" placeholder="API Key"
+                                                name="filestack_apikey" value="{{filestack_obj.apikey}}" />
+                                            <div class="helper-text">
+                                                <a href="#" class="anchor-links">Get a free api key</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="label-input">
+                                            <label for="securityPolicy">Security Policy</label>
+                                            <input type="text" id="policy" name="policy"
+                                                value="{{filestack_obj.policy}}" />
+                                        </div>
+                                        <div class="label-input">
+                                            <label for="securitySignature">Security Signature</label>
+                                            <input type="text" id="signature" name="signature"
+                                                value="{{filestack_obj.signature}}" />
+                                            <div class="helper-text">
+                                                <p>
+                                                    Base64 url-encoded security policy. You must enter a security policy
+                                                    and
+                                                    signature
+                                                    if you have this
+                                                    feature turned on in the <a href="#" class="anchor-links">Filestack
+                                                        Dev
+                                                        Portal</a>.
+                                                </p>
+                                                <p>
+                                                    Security generated signature. See <a href="#"
+                                                        class="anchor-links">signing
+                                                        policies</a> in the
+                                                    Filestack documentation.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tabContent ">
+                                <div class="uploader-setting">
+                                    <div class="uploaderSetting-1">
+                                        <div class="card">
+                                            <p class="checkbox-heading">Specify which source are displayed in the left
+                                                panel.
+                                            </p>
+                                            <div class="checkbox-container">
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="local_file_system"
+                                                        value="local_file_system">
+                                                    <label for="local_file_system">local file system</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="imagesearch"
+                                                        value="imagesearch">
+                                                    <label for="imagesearch">image search</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="url" value="url">
+                                                    <label for="url">Url</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="facebook"
+                                                        value="facebook">
+                                                    <label for="facebook">facebook</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="instagram"
+                                                        value="instagram">
+                                                    <label for="instagram">instagram</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="dropbox"
+                                                        value="dropbox">
+                                                    <label for="dropbox">dropbox</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="unsplash"
+                                                        value="unsplash">
+                                                    <label for="unsplash">unsplash</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="github"
+                                                        value="github">
+                                                    <label for="github">Github</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="box" value="box">
+                                                    <label for="box">box</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="gmail"
+                                                        value="gmail">
+                                                    <label for="gmail">gmail</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="googledrive"
+                                                        value="googledrive">
+                                                    <label for="googledrive">google drive</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="customSource"
+                                                        value="customSource">
+                                                    <label for="customSource">custom source</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="onedrive"
+                                                        value="onedrive">
+                                                    <label for="onedrive">onedrive</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]"
+                                                        id="onedriveforbusiness" value="onedriveforbusiness">
+                                                    <label for="onedriveforbusiness">onedrive for business</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="googlePhotos"
+                                                        value="googlePhotos">
+                                                    <label for="googlePhotos">google photos</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="flickr"
+                                                        value="flickr">
+                                                    <label for="flickr">flickr</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="webcam"
+                                                        value="webcam">
+                                                    <label for="webcam">webcam</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="video"
+                                                        value="video">
+                                                    <label for="video">record video</label>
+                                                </div>
+                                                <div class="checkbox-label">
+                                                    <input type="checkbox" name="from_sources[]" id="audio"
+                                                        value="audio">
+                                                    <label for="audio">record audio</label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="accept_file">Allowed file types to upload</label>
+                                                <input type="text" id="accept_file" name="accept_file"
+                                                    value="{{filestack_obj.accept_file_types | ensure_string | safe}}" />
+                                                <div class="helper-text">
+                                                    <p>image/*, .pdf, video/mp4</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="max_size">Max file size (optional)</label>
+                                                <input type="text" id="max_size" name="max_size"
+                                                    value="{{filestack_obj.max_filesize}}" />
+                                                <div class="helper-text">
+                                                    <p>Limit uploads to be at most max size, Bytes.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="max_files">Max number of files (optional)</label>
+                                                <input type="text" id="max_files" name="max_files"
+                                                    value="{{filestack_obj.max_files}}" />
+                                                <div class="helper-text">
+                                                    <p>Specify the maximum number of files that the user can upload at a
+                                                        time.
+                                                        By default, max files is set to 1.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="max_image_dimension">Max image dimensions (optional)</label>
+                                                <input type="text" id="max_image_dimension" name="max_image_dimension"
+                                                    value="{{filestack_obj.max_image_dimension}}" />
+                                                <div class="helper-text">
+                                                    <p>e.g. [800,600]. Images smaller or larger than the specified
+                                                        dimensions
+                                                        will be resized to this dimension size while maintaining the
+                                                        orignal
+                                                        aspect ratio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="image_dimension">Set image dimensions (optional)</label>
+                                                <input type="text" id="image_dimension" name="image_dimension"
+                                                    value="{{filestack_obj.image_dimension}}" />
+                                                <div class="helper-text">
+                                                    <p>e.g. [800,600]. Images smaller or larger than the specified
+                                                        dimensions
+                                                        will be resized to this dimension size while maintaining the
+                                                        orignal
+                                                        aspect ratio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <p class="radioBox-heading">Image editor</p>
+                                            <div class="radioBox-container">
+                                                <div class="radioBox-label">
+                                                    <input type="radio" name="image_editor" id="simple" value="Simple"
+                                                        {% if filestack_obj.image_editor=="Simple" %} checked {% endif
+                                                        %}>
+                                                    <label for="simple">Simple</label>
+                                                </div>
+                                                <div class="radioBox-label">
+                                                    <input type="radio" name="image_editor" id="transSuite"
+                                                        value="Transformation Suite" {% if
+                                                        filestack_obj.image_editor=="Transformation Suite" %} checked {%
+                                                        endif %}>
+                                                    <label for="transSuite">Transformation Suite</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card">
+                                            <p class="checkbox-heading">Specify which file editing options you want to
+                                                allow.
+                                            </p>
+                                            <div class="checkbox-container">
+                                                <div class="checkbox-label editing-options">
+                                                    <input type="checkbox" name="transformation[]"
+                                                        id="transformation_crop" value="crop" {% if
+                                                        filestack_obj.transformation_crop %} checked {% endif %}>
+                                                    <label for="transformation_crop">crop</label>
+                                                </div>
+                                                <div class="checkbox-label editing-options">
+                                                    <input type="checkbox" name="transformation[]"
+                                                        id="transformation_resize" value="resize" {% if
+                                                        filestack_obj.transformation_resize %} checked {% endif %}>
+                                                    <label for="transformation_resize">resize</label>
+                                                </div>
+                                                <div class="checkbox-label editing-options">
+                                                    <input type="checkbox" name="transformation[]"
+                                                        id="transformation_rotate" value="rotate" {% if
+                                                        filestack_obj.transformation_rotate %} checked {% endif %}>
+                                                    <label for="transformation_rotate">rotate</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="uploaderSetting-2">
+                                        <h4 class="upload-heading">Upload Options</h4>
+                                        <div class="card">
+                                            <div class="keyValue-container">
+                                                <div class="keyValueBtn">
+                                                    <div class="KeyValue-label">
+                                                        <label for="">Key</label>
+                                                        <input type="text" class="key-input" value="Text"
+                                                            name="tag_key[]">
+                                                    </div>
+                                                    <div class="KeyValue-label">
+                                                        <label for="">Value</label>
+                                                        <input type="text" class="key-input" value="Example"
+                                                            name="tag_value[]">
+                                                    </div>
+                                                    <button class="delete-btn">Delete</button>
+                                                </div>
+
+
+                                                <button class="addTag-btn">Add Another Tag</button>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="num_retry">Retry</label>
+                                                <input type="text" id="num_retry" name="num_retry" value="10"
+                                                    value="{{filestack_obj.num_retry}}" />
+                                                <div class="helper-text">
+                                                    <p>Default value 10</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="num_concurrency">Concurrency</label>
+                                                <input type="text" id="num_concurrency" name="num_concurrency"
+                                                    value="{{filestack_obj.num_concurrency}}" />
+                                                <div class="helper-text">
+                                                    <p>Default value 3</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="error_timeout">Timeout</label>
+                                                <input type="text" id="error_timeout" name="error_timeout"
+                                                    value="{{filestack_obj.error_timeout}}" />
+                                                <div class="helper-text">
+                                                    <p>Default value 120000</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uploaderSetting-3">
+                                        <h4 class="upload-heading">Other Upload Options</h4>
+                                        <div class="card">
+                                            <p class="checkbox-heading">
+                                                Other upload options
+                                            </p>
+                                            <div class="checkbox-container">
+                                                <div class="checkbox-label editing-options">
+                                                    <input type="checkbox" name="intergrity_check" id="intergrity_check"
+                                                        {% if filestack_obj.intigintergrity_check %} checked {% endif
+                                                        %}>
+                                                    <label for="intergrityCheck">Disable Intergrity Check</label>
+                                                </div>
+                                                <div class="checkbox-label editing-options">
+                                                    <input type="checkbox" name="intelligent" id="intelligent" {% if
+                                                        filestack_obj.intelligent %} checked {% endif %}>
+                                                    <label for="intelligent">Intelligent</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="chunkSize">Intelligent chunk size number</label>
+                                                <input type="text" id="chunk_size" name="chunk_size"
+                                                    value="{{filestack_obj.chunk_size}}" />
+                                                <div class="helper-text">
+                                                    <p>Set the default initial chunk size for the intelligent ingestion.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="partSize">Part size</label>
+                                                <input type="text" id="part_size" name="part_size"
+                                                    value="{{filestack_obj.part_size}}" />
+                                                <div class="helper-text">
+                                                    <p>Maximum size for file slices. Is overridden when intelligent=true
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="progressInterval">Progress interval</label>
+                                                <input type="text" id="progress_interval" name="progress_interval"
+                                                    value="{{filestack_obj.progress_interval}}" />
+                                                <div class="helper-text">
+                                                    <p>How often to report progress.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="retryFactor">Retry Factor</label>
+                                                <input type="text" id="retry_factor" name="retry_factor"
+                                                    value="{{filestack_obj.retry_factor}}" />
+                                                <div class="helper-text">
+                                                    <p>Factor for exponential backoff on server errors.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="retryMaxTime">Retry max time</label>
+                                                <input type="text" id="retry_maxtime" name="retry_maxtime"
+                                                    value="{{filestack_obj.retry_maxtime}}" />
+                                                <div class="helper-text">
+                                                    <p>Upper bound for exponential backoff.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uploaderSetting-4">
+                                        <h4 class="upload-heading">Picker Options</h4>
+                                        <div class="card">
+                                            <p class="checkbox-heading">
+                                                Picker Options
+                                            </p>
+                                            <div class="pkr-checkbox-cont">
+                                                <div class="pkr-checkbox">
+                                                    <input type="checkbox" id="allow_manual_retry"
+                                                        name="allow_manual_retry" {% if filestack_obj.allow_manual_retry
+                                                        %} checked {% endif %}>
+                                                    <div class="pkr-label">
+                                                        <label for="allow_manual_retry">Allow manual retry</label>
+                                                        <p>Prevents upload modal dialog close on upload failure and
+                                                            allows users
+                                                            to retry.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="pkr-checkbox">
+                                                    <input type="checkbox" id="disable_transformer"
+                                                        name="disable_transformer" {% if
+                                                        filestack_obj.disable_transformer %} checked {% endif %}>
+                                                    <div class="pkr-label">
+                                                        <label for="disable_transformer">Disable transformer</label>
+                                                        <p>When true, removes the ability to edit images.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-dropdown">
+                                                <label for="display_mode">Display Mode</label>
+                                                <div class="custom-dropdown">
+                                                    <select name="display_mode" id="display_mode" class="dropdown">
+                                                        <option {% if filestack_obj.display_mode=='inline' %} selected
+                                                            {% endif %}>Inline</option>
+                                                    </select>
+                                                    <div class="custom-icon">
+                                                        <i class="fa-solid fa-angle-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-dropdown">
+                                                <label for="displayMode">Language (optional)</label>
+                                                <div class="custom-dropdown">
+                                                    <select name="language" id="language" class="dropdown">
+                                                        <option value="en" {% if filestack_obj.language == 'en' %} selected {% endif %}>English</option>
+                                                        <option value="ar" {% if filestack_obj.language == 'ar' %} selected {% endif %}>Arabic</option>
+                                                        <option value="ca" {% if filestack_obj.language == 'ca' %} selected {% endif %}>Catalan</option>
+                                                        <option value="zh" {% if filestack_obj.language == 'zh' %} selected {% endif %}>Chinese</option>
+                                                        <option value="da" {% if filestack_obj.language == 'da' %} selected {% endif %}>Danish</option>
+                                                        <option value="nl" {% if filestack_obj.language == 'nl' %} selected {% endif %}>Dutch</option>
+                                                        <option value="fr" {% if filestack_obj.language == 'fr' %} selected {% endif %}>French</option>
+                                                        <option value="de" {% if filestack_obj.language == 'de' %} selected {% endif %}>German</option>
+                                                        <option value="he" {% if filestack_obj.language == 'he' %} selected {% endif %}>Hebrew</option>
+                                                        <option value="it" {% if filestack_obj.language == 'it' %} selected {% endif %}>Italian</option>
+                                                        <option value="ja" {% if filestack_obj.language == 'ja' %} selected {% endif %}>Japanese</option>
+                                                        <option value="ko" {% if filestack_obj.language == 'ko' %} selected {% endif %}>Korean</option>
+                                                        <option value="no" {% if filestack_obj.language == 'no' %} selected {% endif %}>Norwegian</option>
+                                                        <option value="pl" {% if filestack_obj.language == 'pl' %} selected {% endif %}>Polish</option>
+                                                        <option value="pt" {% if filestack_obj.language == 'pt' %} selected {% endif %}>Portuguese</option>
+                                                        <option value="ru" {% if filestack_obj.language == 'ru' %} selected {% endif %}>Russian</option>
+                                                        <option value="es" {% if filestack_obj.language == 'es' %} selected {% endif %}>Spanish</option>
+                                                        <option value="sv" {% if filestack_obj.language == 'sv' %} selected {% endif %}>Swedish</option>
+                                                        <option value="tr" {% if filestack_obj.language == 'tr' %} selected {% endif %}>Turkish</option>
+                                                        <option value="vi" {% if filestack_obj.language == 'vi' %} selected {% endif %}>Vietnamese</option>
+                                                    </select>                                                    
+                                                    <div class="custom-icon">
+                                                        <i class="fa-solid fa-angle-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="min_files">Min Files</label>
+                                                <input type="text" id="min_files" name="min_files"
+                                                    value="{{filestack_obj.min_files}}" />
+                                                <div class="helper-text">
+                                                    <p>Mininum number of files required to start uploading.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="label-input">
+                                                <label for="support_email">Support Email</label>
+                                                <input type="text" id="support_email" name="support_email"
+                                                    placeholder="email@domain.com"
+                                                    value="{{filestack_obj.support_email}}" />
+                                                <div class="helper-text">
+                                                    <p>Set support email to display in case of error.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tabContent">
+                                <div class="storage-setting">
+                                    <div class="card">
+                                        <div class="label-dropdown">
+                                            <label for="displayMode">Cloud Storage (optional)</label>
+                                            <div class="custom-dropdown">
+                                                <select name="cloud_container" id="cloud_container" class="dropdown">
+                                                    <option {% if filestack_obj.cloud_container=='S3' %} selected {%
+                                                        endif %}>S3</option>
+                                                    <option {% if filestack_obj.cloud_container=='Dropbox' %} selected
+                                                        {% endif %}>Dropbox</option>
+                                                    <option {% if filestack_obj.cloud_container=='Google Drive' %}
+                                                        selected {% endif %}>Google Drive</option>
+                                                </select>
+                                                <div class="custom-icon">
+                                                    <i class="fa-solid fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="helper-text">
+                                                <p>Requires additional setup & costs at filestack.com.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="label-input">
+                                            <label for="cloud_folder">Cloud Folder/Container (optional)</label>
+                                            <input type="text" id="cloud_folder" name="cloud_folder"
+                                                value="{{filestack_obj.cloud_folder}}" />
+                                            <div class="helper-text">
+                                                <p>e.g. “assets_bucket”. Bucket/container to use inside of your cloud
+                                                    storage.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="label-input">
+                                            <label for="cloud_path">Cloud Path (optional)</label>
+                                            <input type="text" id="cloud_path" name="cloud_path"
+                                                value="{{filestack_obj.cloud_path}}" />
+                                            <div class="helper-text">
+                                                <p>e.g. “/myfiles/1234.png”. The path to store the file at within the
+                                                    specified
+                                                    file store. For s3, this is the key where the file will be stored
+                                                    at.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div>
+                                <button class="black-btn" name="btnSave" id="btnSave">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const tabBtn = document.querySelectorAll(".tabBtn");
+        const tabContent = document.querySelectorAll(".tabContent")
+        tabContent.forEach(content => content.style.display = "none");
+        document.querySelector(".defaultOpen").style.display = "block";
+        tabBtn.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                tabBtn.forEach(btn => btn.classList.remove('activeTab'));
+                tabContent.forEach(content => content.style.display = "none");
+                tab.classList.add('activeTab');
+                tabContent[index].style.display = "block"
+            })
+        })
+
+        const fromSources = {{ filestack_obj.from_sources | ensure_array | safe }};
+
+        // Iterate through the array and update the checked status
+        fromSources.forEach(id => {
+            const checkbox = document.getElementById(id);
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
+
+        const maxFileSize = '{{filestack_obj.max_filesize}}';
+        if (maxFileSize === 'None' || maxFileSize === undefined || maxFileSize === null || maxFileSize === "") {
+            document.getElementById('max_size').value = 10000000;
+        }
+
+        $(document).ready(function () {
+            $('.tabBtn').click(function () {
+                return false
+            })
+            $('#frmPickerPreference #btnSave').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/save-picker-preference',
+                    data: $('#frmPickerPreference').serialize(), // serializes the form's elements.
+                    success: function (data) {
+                        if (data.status) {
+                            alert(data.msg)
+                            return false;
+                        }
+                        else {
+                            alert(data.msg)
+                            return false;
+                        }
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+{% endblock %}

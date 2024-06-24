@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+    <div>
+  
+      <div id="faqs" class="tabcontent" style="display: block;">
+        <div class="main-container">
+            <section class="accordion">
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb1" checked>
+                  <label for="cb1" class="tab__label"><p>Do I need a Filestack account?</p></label>
+                  <div class="tab__content">
+                    <p>Yes, you will need a Filestack account to access its services. Filestack's
+                      offerings begin with the Start Plan, which provides a comprehensive suite of features including 75GB of bandwidth, 20,000 uploads, 50,000 transformations,
+                      50GB of Filestack Storage, and a maximum file size of 1GB. This plan, priced at
+                      $69 per month, also starts with a 21-day free trial and caters to users with
+                      moderate to high file-uploading needs. Additionally, Filestack offers higher-tier
+                      plans for users with larger file-uploading requirements. To explore all pricing
+                      options and to sign up, visit <a href="https://www.filestack.com/pricing" target="_blank">https://www.filestack.com/pricing</a>.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb2">
+                  <label for="cb2" class="tab__label"><p>Does it integrate with the Shopify Content Section?</p></label>
+                  <div class="tab__content">
+                    <p>Yes, Filestack is compatible with the Shopify Content Section. All assets uploaded thought Filestack will be available in the Content Section in the native Shopify menu in the left side of the UI.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb3">
+                  <label for="cb3" class="tab__label"><p>Is it easily added to pages or posts for signed-in & non-signed-in users to
+                    upload files?</p></label>
+                  <div class="tab__content">
+                    <p>Absolutely. Filestack provides a seamless experience for both you and your
+                      users to easily upload and manage files.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb4">
+                  <label for="cb4" class="tab__label"><p>What is the shortcode for displaying the Upload in a blog post or page?</p></label>
+                  <div class="tab__content">
+                    <p>To display the Upload, you can use the shortcode [filestack]. Check the plugin
+                      documentation to learn more about the shortcode parameters and options.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb5">
+                  <label for="cb5" class="tab__label"><p>Can I customize the appearance of the upload button or upload modal?</p>
+                    </label>
+                  <div class="tab__content">
+                    <p>Yes, you can customize the upload button's appearance and modal. Detailed
+                      instructions can be found on the settings page of the plugin.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb6">
+                  <label for="cb6" class="tab__label"><p>Do the uploaded files have CDN endpoints?</p>
+                  </label>
+                  <div class="tab__content">
+                    <p>Yes, uploaded files have CDN endpoints. When you receive the response
+                      metadata, it will include the CDN URL that you can utilize in your callback
+                      handlers.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb7">
+                  <label for="cb7" class="tab__label"><p>Do I need to configure Filestack Storage or CDN?</p>
+                  </label>
+                  <div class="tab__content">
+                    <p>No, Filestack Storage and CDN will work automatically without any additional
+                      configuration required. However, if you prefer to customize the storage
+                      location or use your own CDN, you can modify the default configuration.
+                      Further details can be found in the Filestack documentation at
+                      <a href="https://www.filestack.com/docs/cloud-storage/s3" target="_blank">https://www.filestack.com/docs/cloud-storage/s3</a>.</p>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="checkbox" name="accordion-1" id="cb8">
+                  <label for="cb8" class="tab__label"><p>Where are the uploaded files stored?</p>
+                  </label>
+                  <div class="tab__content">
+                    <p>By default, uploaded files are stored in Filestack’s S3 bucket. However, you can
+                      configure your Filestack account to store in your own S3 bucket or upgrade to
+                      store in one of the following cloud storage services:
+                      <ul class="list-item">
+                        <li>Rackspace</li>
+                        <li>Google Cloud</li>
+                        <li>Microsoft Azure</li>
+                        <li>Dropbox</li>
+                      </ul>
+                    </p>
+                  </div>
+                </div>
+              </section>
+        </div>
+      </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+
+{% endblock %}
